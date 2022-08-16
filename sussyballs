@@ -71,7 +71,7 @@ local function DisplayFruits(Fruit, Count)
    
    NumeroDeFrutas.Text = "Fruta Atual:" .. Count .. "/" .. #Fruits
 
-   print(Fruit.Name .. " Fruta a ser mostrada")
+    print(Fruit.Name .. " Fruta a ser mostrada")
 
    if VPF:FindFirstChild("DisplayClone") then VPF:FindFirstChild("DisplayClone"):Destroy() end
    if game.workspace:FindFirstChild("SussyCam") then game.workspace:FindFirstChild("SussyCam"):Destroy() end
@@ -133,6 +133,7 @@ local function FruitSelection(FruitTable)
 end
 
 local function FillFruitsTable()
+--print("ENXENDO!")
 
 Fruits = {}
 
