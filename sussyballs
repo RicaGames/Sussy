@@ -90,7 +90,7 @@ local function DisplayFruits(Fruit, Count)
 
    Model.PrimaryPart = Clone.Handle
  
-   Cam.CFrame = CFrame.new(Model.PrimaryPart.CFrame + Vector3.new(3, 5, 3)) 
+   Cam.CFrame = Vector3.new(Model.PrimaryPart.CFrame + Vector3.new(3, 5, 3)) 
    Cam.Focus = Model:GetPrimaryPartCFrame()
 end
 
