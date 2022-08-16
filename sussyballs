@@ -26,6 +26,16 @@ Label.BorderSizePixel = 0
 Label.Text = "Calculating..."
 Label.ZIndex = 10
 
+local NumeroDeFrutas = Instance.new("TextLabel")
+NumeroDeFrutas.Name = "SussyLabel"
+NumeroDeFrutas.Parent = VPF
+NumeroDeFrutas.Size = UDim2.new(0.6, 0, 0.06, 0)
+NumeroDeFrutas.Position = UDim2.new(0.2, 0, 0.94, 0)
+NumeroDeFrutas.BorderSizePixel = 0
+NumeroDeFrutas.Text = "Fruta Atual: 1/"
+NumeroDeFrutas.BackgroundColor3 = Color3.new(0.73,0.63,0.63)
+NumeroDeFrutas.ZIndex = 10
+
 local RefreshBt = Instance.new("TextButton")
 RefreshBt.Parent = VPF
 RefreshBt.Size = UDim2.new(1,0,0.1,0)
@@ -53,22 +63,59 @@ RightBT.Text = ">"
 
 VPF.Visible = true
 
-local function FillFruitsTable() 
+local function DisplayFruits(Fruit)
+   
+   if game.workspace:FindFirstChild("SussyCam") then game.workspace:FindFirstChild("SussyCam"):Destroy() end
+  
+   local Cam = Instance.new("Camera")
+   Cam.Parent = game.workspace
+   Cam.Name = "SussyCam"
 
-Fruits = {}
-
- for i,v in ipairs(WC) do
-
-    if v.Name == "Fruit " or v.ClassName == "Tool" then
-    
-        table.insert(Fruits, i,v)
-      
-    end
-
- end
+   local Clone = Fruit:Clone()
+   Clone.Name = "DisplayClone"
+   Clone.Parent = VPF
 
 end
 
+local function FillFruitsTable()
+
+print("ENXENDO!")
+
+Fruits = {}
+
+for i,v in ipairs(WC) do
+
+   if v.Name == "Fruit " or v.ClassName == "Tool" then
+    
+      table.insert(Fruits, i,v)
+      
+   end
+
+end
+
+
+if #Fruits > 1 then
+
+  RightBT.Visible = true
+  LeftBt.Visible = true
+  NumeroDeFrutas.Visible = true
+
+  NumeroDeFrutas.Text = "Fruta Atual: 1/" .. #Fruits
+else
+
+  RightBT.Visible = false
+  LeftBt.Visible = false
+
+  NumeroDeFrutas.Visible = false
+end
+
+
+print(#Fruits)
+end
+
+FillFruitsTable()
 game.workspace.ChildAdded:Connect(FillFruitsTable)
 RefreshBt.MouseButton1Click:Connect(FillFruitsTable)
+
+
 
