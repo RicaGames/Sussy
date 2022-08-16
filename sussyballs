@@ -1,0 +1,28 @@
+local PGUI = game.Players.LocalPlayer.PlayerGui
+
+local Fruit = nil
+
+if PGUI:FindFirstChild("SussyGui") then PGUI:FindFirstChild("SussyGui"):Destroy() end
+
+local NSG = Instance.new("ScreenGui")
+NSG.Name = "SussyGui"
+NSG.Parent = PGUI
+
+NSG.Enabled = true
+
+local VPF = Instance.new("ViewportFrame")
+VPF.Name = "SussyVpF"
+VPF.Parent = NSG
+VPF.Size = UDim2.new(0.2,0,0.3,0)
+VPF.BackgroundColor3 = Color3.new(0.63,0.63,0.63)
+
+local Label = Instance.new("TextLabel")
+Label.Name = "SussyLabel"
+Label.Parent = VPF
+Label.Size = UDim2.new(1, 0, 0.06, 0)
+Label.Position = UDim2.new(0, 0, 0.5, 0)
+Label.BorderSizePixel = 0
+Label.Text = "Calculating..."
+Label.ZIndex = 10
+
+VPF.Visible = true
