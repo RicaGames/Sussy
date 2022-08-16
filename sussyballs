@@ -2,7 +2,6 @@
 local lb = nil
 local rb = nil
 
-
 local PGUI = game.Players.LocalPlayer.PlayerGui
 local WC = game.Workspace:GetChildren()
 
@@ -68,9 +67,11 @@ RightBT.Text = ">"
 
 VPF.Visible = true
 
-local function DisplayFruits(Fruit)
+local function DisplayFruits(Fruit, Count)
    
-   print(Fruit.Name .. " Fruta a ser mostrada")
+   NumeroDeFrutas.Text = "Fruta Atual:" Count .. "/" .. #Fruits
+
+    print(Fruit.Name .. " Fruta a ser mostrada")
 
    if VPF:FindFirstChild("DisplayClone") then VPF:FindFirstChild("DisplayClone"):Destroy() end
    if game.workspace:FindFirstChild("SussyCam") then game.workspace:FindFirstChild("SussyCam"):Destroy() end
@@ -90,31 +91,31 @@ local function FruitSelection(FruitTable)
     local Count = 1
 
     lb = LeftBt.MouseButton1Click:Connect(function()
-       NumeroDeFrutas.Text = "Fruta Atual:" Count .. "/" .. #Fruits 
+        
       
        if Count > 1 then
        Count = Count - 1      
        
        
-       DisplayFruits(FruitTable[Count])
+       DisplayFruits(FruitTable[Count], Count)
 
        else
        Count = #FruitTable
-       DisplayFruits(FruitTable[Count])
+       DisplayFruits(FruitTable[Count], Count)
        
        end
     end)
 
     rb = RightBT.MouseButton1Click:Connect(function()
-       NumeroDeFrutas.Text = "Fruta Atual:" Count .. "/" .. #Fruits
+       
      
        if Count < #FruitTable then
        Count = Count + 1      
-       DisplayFruits(FruitTable[Count])       
+       DisplayFruits(FruitTable[Count], Count)       
 
        else
        Count = 1
-       DisplayFruits(FruitTable[Count])
+       DisplayFruits(FruitTable[Count], Count)
 
        end
     end)
