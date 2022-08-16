@@ -70,6 +70,8 @@ VPF.Visible = true
 
 local function DisplayFruits(Fruit)
    
+   print(Fruit.Name .. " Fruta a ser mostrada")
+
    if VPF:FindFirstChild("DisplayClone") then VPF:FindFirstChild("DisplayClone"):Destroy() end
    if game.workspace:FindFirstChild("SussyCam") then game.workspace:FindFirstChild("SussyCam"):Destroy() end
   
@@ -86,21 +88,27 @@ end
 local function FruitSelection(FruitTable)
     
     local Count = 1
+
     lb = LeftBt.MouseButton1Click:Connect(function()
+       NumeroDeFrutas.Text = "Fruta Atual:" Count .. "/" .. #Fruits 
+      
        if Count > 1 then
        Count = Count - 1      
+       
        
        DisplayFruits(FruitTable[Count])
 
        else
        Count = #FruitTable
        DisplayFruits(FruitTable[Count])
-  
+       
        end
     end)
 
     rb = RightBT.MouseButton1Click:Connect(function()
-       if rb < #FruitTable then
+       NumeroDeFrutas.Text = "Fruta Atual:" Count .. "/" .. #Fruits
+     
+       if Count < #FruitTable then
        Count = Count + 1      
        DisplayFruits(FruitTable[Count])       
 
@@ -110,6 +118,11 @@ local function FruitSelection(FruitTable)
 
        end
     end)
+
+
+
+    
+   
 end
 
 local function FillFruitsTable()
@@ -123,7 +136,7 @@ for i,v in ipairs(WC) do
    if v.Name == "Fruit " or v.ClassName == "Tool" then
         
       print(v.ClassName .. " O VERDADEIRO "  .. v.Name)
-      table.insert(Fruits, i,v)
+      table.insert(Fruits, 1,v)
       
    end
 
@@ -168,6 +181,8 @@ end
 
 
 
+
+print(#Fruits)
 end
 
 
