@@ -1,6 +1,7 @@
 local PGUI = game.Players.LocalPlayer.PlayerGui
+local WC = game.Workspace:GetChildren()
 
-local Fruit = nil
+local Fruits = {}
 
 if PGUI:FindFirstChild("SussyGui") then PGUI:FindFirstChild("SussyGui"):Destroy() end
 
@@ -25,4 +26,49 @@ Label.BorderSizePixel = 0
 Label.Text = "Calculating..."
 Label.ZIndex = 10
 
+local RefreshBt = Instance.new("TextButton")
+RefreshBt.Parent = VPF
+RefreshBt.Size = UDim2.new(1,0,0.1,0)
+RefreshBt.Position = UDim2.new(0, 0, 0, 0)
+RefreshBt.BackgroundColor3 = Color3.new(0.73,0.63,0.63)
+RefreshBt.BorderSizePixel = 0
+RefreshBt.Text = "Refresh Fruits"
+
+local LeftBt = Instance.new("TextButton")
+LeftBt.Parent = VPF
+LeftBt.Size = UDim2.new(0.2,0,0.2,0)
+LeftBt.Position = UDim2.new(0, 0, 0.8, 0)
+LeftBt.BackgroundColor3 = Color3.new(0.73,0.63,0.63)
+LeftBt.BorderSizePixel = 0
+LeftBt.Text = "<"
+
+local RightBT = Instance.new("TextButton")
+RightBT.Parent = VPF
+RightBT.Size = UDim2.new(0.2,0,0.2,0)
+RightBT.Position = UDim2.new(0.8, 0, 0.8, 0)
+RightBT.BackgroundColor3 = Color3.new(0.73,0.63,0.63)
+RightBT.BorderSizePixel = 0
+RightBT.Text = ">"
+
+
 VPF.Visible = true
+
+local function FillFruitsTable() 
+
+Fruits = {}
+
+ for i,v in ipairs(WC) do
+
+    if v.Name == "Fruit " or v.ClassName == "Tool" then
+    
+        table.insert(Fruits, i,v)
+      
+    end
+
+ end
+
+end
+
+game.workspace.ChildAdded:Connect(FillFruitsTable)
+RefreshBt.MouseButton1Click:Connect(FillFruitsTable)
+
