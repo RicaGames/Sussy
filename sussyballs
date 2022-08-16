@@ -68,7 +68,7 @@ RightBT.Text = ">"
 VPF.Visible = true
 
 local function DisplayFruits(Fruit, Count)
-   
+
    NumeroDeFrutas.Text = "Fruta Atual:" .. Count .. "/" .. #Fruits
 
     print(Fruit.Name .. " Fruta a ser mostrada")
@@ -77,13 +77,21 @@ local function DisplayFruits(Fruit, Count)
    if game.workspace:FindFirstChild("SussyCam") then game.workspace:FindFirstChild("SussyCam"):Destroy() end
   
    local Cam = Instance.new("Camera")
+   Cam.CameraType = Enum.CameraType.Scriptable
    Cam.Parent = game.workspace
    Cam.Name = "SussyCam"
-
+   
+   local Model = Instance.new("Model")
+   Model.Parent = VPF  
+ 
    local Clone = Fruit:Clone()
    Clone.Name = "DisplayClone"
-   Clone.Parent = VPF
+   Clone.Parent = Model
 
+   Model.PrimaryPart = Clone.Handle
+ 
+   Cam.CFrame = CFrame.new(Model.PrimaryPart.CFrame + Vector3.new(3, 5, 3)) 
+   Cam.Focus = Model:GetPrimaryPartCFrame()
 end
 
 local function FruitSelection(FruitTable)
