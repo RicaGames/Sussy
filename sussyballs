@@ -1,3 +1,8 @@
+-- connections
+local lb = nil
+local rb = nil
+
+
 local PGUI = game.Players.LocalPlayer.PlayerGui
 local WC = game.Workspace:GetChildren()
 
@@ -65,6 +70,7 @@ VPF.Visible = true
 
 local function DisplayFruits(Fruit)
    
+   if VPF:FindFirstChild("DisplayClone") then VPF:FindFirstChild("DisplayClone"):Destroy() end
    if game.workspace:FindFirstChild("SussyCam") then game.workspace:FindFirstChild("SussyCam"):Destroy() end
   
    local Cam = Instance.new("Camera")
@@ -75,6 +81,35 @@ local function DisplayFruits(Fruit)
    Clone.Name = "DisplayClone"
    Clone.Parent = VPF
 
+end
+
+local function FruitSelection(FruitTable)
+    
+    local Count = 1
+    lb = LeftBt.MouseButton1Click:Connect(function()
+       if Count > 1 then
+       Count = Count - 1      
+       
+       DisplayFruits(FruitTable[Count])
+
+       else
+       Count = #FruitTable
+       DisplayFruits(FruitTable[Count])
+  
+       end
+    end)
+
+    rb = RightBT.MouseButton1Click:Connect(function()
+       if rb < #FruitTable then
+       Count = Count + 1      
+       DisplayFruits(FruitTable[Count])       
+
+       else
+       Count = 1
+       DisplayFruits(FruitTable[Count])
+
+       end
+    end)
 end
 
 local function FillFruitsTable()
@@ -94,24 +129,45 @@ for i,v in ipairs(WC) do
 
 end
 
+if #Fruits > 0 then
 
+NumeroDeFrutas.Visible = true
+
+NumeroDeFrutas.Text = "Fruta Atual: 1/" .. #Fruits
+
+FruitSelection(Fruits)
+
+else
+
+if lb ~= nil then
+
+lb:Disconnect()
+
+end
+
+if rb ~= nil then
+
+rb:Disconnect()
+
+end
+
+NumeroDeFrutas.Visible = false
+
+end
 if #Fruits > 1 then
 
   RightBT.Visible = true
   LeftBt.Visible = true
-  NumeroDeFrutas.Visible = true
 
-  NumeroDeFrutas.Text = "Fruta Atual: 1/" .. #Fruits
 else
 
   RightBT.Visible = false
   LeftBt.Visible = false
 
-  NumeroDeFrutas.Visible = false
 end
 
 
-print(#Fruits)
+
 end
 
 
