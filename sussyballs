@@ -79,14 +79,15 @@ end
 
 local function FillFruitsTable()
 
-print("ENXENDO!")
+--print("ENXENDO!")
 
 Fruits = {}
 
 for i,v in ipairs(WC) do
 
    if v.Name == "Fruit " or v.ClassName == "Tool" then
-    
+        
+      print(v.ClassName .. " O VERDADEIRO "  .. v.Name)
       table.insert(Fruits, i,v)
       
    end
@@ -113,9 +114,12 @@ end
 print(#Fruits)
 end
 
+
+-- Connections
 FillFruitsTable()
 game.workspace.ChildAdded:Connect(FillFruitsTable)
 RefreshBt.MouseButton1Click:Connect(FillFruitsTable)
+
 
 
 
