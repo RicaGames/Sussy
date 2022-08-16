@@ -69,7 +69,7 @@ VPF.Visible = true
 
 local function DisplayFruits(Fruit, Count)
    
-   NumeroDeFrutas.Text = "Fruta Atual:" Count .. "/" .. #Fruits
+   NumeroDeFrutas.Text = "Fruta Atual:" .. Count .. "/" .. #Fruits
 
     print(Fruit.Name .. " Fruta a ser mostrada")
 
@@ -89,6 +89,12 @@ end
 local function FruitSelection(FruitTable)
     
     local Count = 1
+
+    if #FruitTable == 1 then
+
+    DisplayFruits(FruitTable[1], 1)
+
+    end
 
     lb = LeftBt.MouseButton1Click:Connect(function()
         
@@ -127,7 +133,6 @@ local function FruitSelection(FruitTable)
 end
 
 local function FillFruitsTable()
-
 --print("ENXENDO!")
 
 Fruits = {}
